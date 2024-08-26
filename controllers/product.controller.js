@@ -17,6 +17,19 @@ const getProduct_id = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+const getProduct_by_name = async (req,res) => {
+    try {
+        const {name} = req.params;
+        const products = await Product.findOne({ name });
+        if (!products) {
+            res.status(404).json({ "message": "Product not found" });
+        }
+        const productsUpdate = await Product.findById(id);
+        res.status(200).json(productsUpdate);
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
+}
 const update_products = async (req, res) => {
     try {
         const product = await Product.create(req.body);
@@ -58,6 +71,7 @@ const del_products = async (req, res) => {
 module.exports = {
     getProducts,
     getProduct_id,
+    getProduct_by_name,
     update_products,
     edit_products,
     del_products

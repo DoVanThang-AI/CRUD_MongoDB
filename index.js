@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const productRoute = require('./routes/product.route.js');
+const UsersRoute = require("./routes/users.router.js");
 const app = express()
 
 //middleware
@@ -9,6 +10,7 @@ app.use(express.urlencoded({extended : false}));
 
 //routes
 app.use("/api/products", productRoute);
+app.use("/api/users",UsersRoute);
 
 app.get('/', (req,res) => {
     res.send("hello from node API updares");
